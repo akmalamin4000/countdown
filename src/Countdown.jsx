@@ -1,21 +1,22 @@
 import { useEffect, useState } from 'react'
 
-// Returns a Date object for the next 17:00 Malaysia time (MYT, UTC+8)
-function getNext5pmMalaysia(now = new Date()) {
-  // Malaysia is UTC+8, so 17:00 MYT == 09:00 UTC
+// Returns a Date object for the next 17:30 Malaysia time (MYT, UTC+8)
+function getNext530pmMalaysia(now = new Date()) {
+  // Malaysia is UTC+8, so 17:30 MYT == 09:30 UTC
   const targetUtcHour = 17 - 8 // 9
+  const targetUtcMinute = 30
 
   // Use UTC components for a stable cross-timezone target
   const year = now.getUTCFullYear()
   const month = now.getUTCMonth()
   const day = now.getUTCDate()
 
-  // Build candidate target at today 09:00 UTC (which is 17:00 MYT)
-  let target = new Date(Date.UTC(year, month, day, targetUtcHour, 0, 0, 0))
+  // Build candidate target at today 09:30 UTC (which is 17:30 MYT)
+  let target = new Date(Date.UTC(year, month, day, targetUtcHour, targetUtcMinute, 0, 0))
 
   // If it's already past that moment, use tomorrow
   if (now.getTime() >= target.getTime()) {
-    const tomorrow = new Date(Date.UTC(year, month, day + 1, targetUtcHour, 0, 0, 0))
+    const tomorrow = new Date(Date.UTC(year, month, day + 1, targetUtcHour, targetUtcMinute, 0, 0))
     target = tomorrow
   }
 
@@ -37,11 +38,11 @@ function formatDuration(ms) {
 
 export default function Countdown() {
   const [now, setNow] = useState(() => new Date())
-  const [target, setTarget] = useState(() => getNext5pmMalaysia(new Date()))
+  const [target, setTarget] = useState(() => getNext530pmMalaysia(new Date()))
 
   useEffect(() => {
     // Keep target synced with current time in case day rolls over while app running
-    setTarget(getNext5pmMalaysia(now))
+    setTarget(getNext530pmMalaysia(now))
   }, [])
 
   useEffect(() => {
@@ -51,7 +52,7 @@ export default function Countdown() {
 
       // when we pass the target, compute the next day's target
       if (t.getTime() >= target.getTime()) {
-        setTarget(getNext5pmMalaysia(t))
+        setTarget(getNext530pmMalaysia(t))
       }
     }, 1000)
     return () => clearInterval(id)
@@ -60,7 +61,7 @@ export default function Countdown() {
   const remainingMs = Math.max(0, target.getTime() - now.getTime())
   const formatted = formatDuration(remainingMs)
 
-  // Display target localized for user's locale, but mention it's Malaysia 17:00
+  // Display target localized for user's locale, but mention it's Malaysia 17:30
   const localizedTarget = target.toLocaleString(undefined, {
     weekday: 'short',
     year: 'numeric',
@@ -76,7 +77,7 @@ export default function Countdown() {
       <h2>Claim akan dapat dlm masa</h2>
       <div className="countdown-clock" aria-live="polite">{formatted}</div>
       <div className="countdown-target">Target: {localizedTarget} (MYT)</div>
-      {remainingMs === 0 && <div className="countdown-now">It's 5:00 PM in Malaysia now!</div>}
+      {remainingMs === 0 && <div className="countdown-now">It's 5:30 PM in Malaysia now!</div>}
     </div>
   )
 }
