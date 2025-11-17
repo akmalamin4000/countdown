@@ -40,3 +40,43 @@
 .read-the-docs {
   color: #888;
 }
+
+.app-root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.subtitle {
+  margin-top: 0.25rem;
+  color: #555;
+}
+
+.countdown-root {
+  background: linear-gradient(180deg, #ffffffcc, #f6f8ffcc);
+  border: 1px solid #e6e9ff;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(50,60,90,0.08);
+  text-align: center;
+  min-width: 280px;
+}
+
+.countdown-clock {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace;
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin: 0.5rem 0 0.25rem;
+}
+
+.countdown-target {
+  color: #666;
+  font-size: 0.875rem;
+}
+
+.countdown-now {
+  margin-top: 0.5rem;
+  color: #0b6;
+  font-weight: 700;
+}
