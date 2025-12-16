@@ -74,10 +74,26 @@ export default function Countdown() {
 
   return (
     <div className="countdown-root">
-      <h2>Claim akan dapat dlm masa</h2>
-      <div className="countdown-clock" aria-live="polite">{formatted}</div>
-      <div className="countdown-target">Target: {localizedTarget} (MYT)</div>
-      {remainingMs === 0 && <div className="countdown-now">It's 5:30 PM in Malaysia now!</div>}
+      <h2 className="apology-title">⚠️ Important Notice</h2>
+      
+      <div className="apology-message">
+        <p className="apology-main">
+          We sincerely apologize to inform you that your claim will <strong>no longer be processed</strong>. 
+          After careful review and consideration, we regret that we are unable to proceed with your request.
+        </p>
+        
+        <p className="apology-secondary">
+          We understand this may be disappointing news, and we kindly ask that you do not hold any further expectations 
+          regarding this matter. The decision is final and cannot be reversed.
+        </p>
+        
+        <p className="thank-you">
+          Thank you for placing your trust in us and for following our updates. We appreciate your understanding 
+          and patience throughout this process.
+        </p>
+      </div>
+
+      <div className="tagline">🎄 We Begin With Nature 🎄</div>
     </div>
   )
 }

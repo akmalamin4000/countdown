@@ -5,17 +5,8 @@
   text-align: center;
 }
 
-/* Theme variables: default = light */
-:root {
-  --bg: #ffffff;
-  --text: #111827;
-  --muted: #6b7280;
-  --card-bg: linear-gradient(180deg, #ffffffcc, #f6f8ffcc);
-  --border: #e6e9ff;
-  --shadow: rgba(50,60,90,0.08);
-}
-
-/* Dark theme overrides */
+/* Dark theme only (Christmas winter theme) */
+:root,
 [data-theme="dark"] {
   --bg: #0b1220;
   --text: #e6eef8;
@@ -111,27 +102,71 @@ body {
 .countdown-root {
   background: var(--card-bg);
   border: 1px solid var(--border);
-  padding: 1.5rem 2rem;
+  padding: 2rem 2.5rem;
   border-radius: 12px;
   box-shadow: 0 6px 18px var(--shadow);
   text-align: center;
-  min-width: 280px;
+  min-width: 320px;
+  max-width: 600px;
 }
 
-.countdown-clock {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace;
-  font-size: 2.5rem;
-  font-weight: 600;
-  margin: 0.5rem 0 0.25rem;
-}
-
-.countdown-target {
-  color: var(--muted);
-  font-size: 0.875rem;
-}
-
-.countdown-now {
-  margin-top: 0.5rem;
-  color: #0b6;
+.apology-title {
+  color: #ff6b6b;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
   font-weight: 700;
+}
+
+.apology-message {
+  background: rgba(255, 107, 107, 0.05);
+  border: 1px solid rgba(255, 107, 107, 0.2);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.apology-main {
+  color: #e6eef8;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.apology-main strong {
+  color: #ff6b6b;
+  font-weight: 700;
+}
+
+.apology-secondary {
+  color: #c4d0e3;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.thank-you {
+  color: #9aa6bd;
+  line-height: 1.6;
+  font-size: 0.9rem;
+  font-style: italic;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+
+.tagline {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 1.5rem 0;
+  color: #4ade80;
+  letter-spacing: 0.5px;
+  font-style: italic;
+}
+
+.season-greeting {
+  margin-top: 1.5rem;
+  color: #4ade80;
+  font-weight: 600;
+  font-size: 1.1rem;
 }
