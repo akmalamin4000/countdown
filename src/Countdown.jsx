@@ -1,99 +1,61 @@
 import { useEffect, useState } from 'react'
+import './Countdown.css'
 
-// Returns a Date object for the next 17:30 Malaysia time (MYT, UTC+8)
-function getNext530pmMalaysia(now = new Date()) {
-  // Malaysia is UTC+8, so 17:30 MYT == 09:30 UTC
-  const targetUtcHour = 17 - 8 // 9
-  const targetUtcMinute = 30
+// Target: August 15, 2026, 2:00 AM Malaysia Time (UTC+8)
+// UTC+8 02:00 → UTC 18:00 the day before (Aug 14)
+const TARGET_DATE = new Date(Date.UTC(2026, 7, 14, 18, 0, 0))
 
-  // Use UTC components for a stable cross-timezone target
-  const year = now.getUTCFullYear()
-  const month = now.getUTCMonth()
-  const day = now.getUTCDate()
+function getTimeLeft() {
+  const now = new Date()
+  const diff = Math.max(0, TARGET_DATE.getTime() - now.getTime())
 
-  // Build candidate target at today 09:30 UTC (which is 17:30 MYT)
-  let target = new Date(Date.UTC(year, month, day, targetUtcHour, targetUtcMinute, 0, 0))
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000)
 
-  // If it's already past that moment, use tomorrow
-  if (now.getTime() >= target.getTime()) {
-    const tomorrow = new Date(Date.UTC(year, month, day + 1, targetUtcHour, targetUtcMinute, 0, 0))
-    target = tomorrow
-  }
-
-  return target
-}
-
-function formatDuration(ms) {
-  if (ms <= 0) return '00:00:00'
-  const totalSeconds = Math.floor(ms / 1000)
-  const hours = Math.floor(totalSeconds / 3600)
-  const minutes = Math.floor((totalSeconds % 3600) / 60)
-  const seconds = totalSeconds % 60
-
-  const hh = String(hours).padStart(2, '0')
-  const mm = String(minutes).padStart(2, '0')
-  const ss = String(seconds).padStart(2, '0')
-  return `${hh}:${mm}:${ss}`
+  return { days, hours, minutes, seconds, total: diff }
 }
 
 export default function Countdown() {
-  const [now, setNow] = useState(() => new Date())
-  const [target, setTarget] = useState(() => getNext530pmMalaysia(new Date()))
+  const [timeLeft, setTimeLeft] = useState(getTimeLeft)
 
   useEffect(() => {
-    // Keep target synced with current time in case day rolls over while app running
-    setTarget(getNext530pmMalaysia(now))
+    const id = setInterval(() => setTimeLeft(getTimeLeft()), 1000)
+    return () => clearInterval(id)
   }, [])
 
-  useEffect(() => {
-    const id = setInterval(() => {
-      const t = new Date()
-      setNow(t)
-
-      // when we pass the target, compute the next day's target
-      if (t.getTime() >= target.getTime()) {
-        setTarget(getNext530pmMalaysia(t))
-      }
-    }, 1000)
-    return () => clearInterval(id)
-  }, [target])
-
-  const remainingMs = Math.max(0, target.getTime() - now.getTime())
-  const formatted = formatDuration(remainingMs)
-
-  // Display target localized for user's locale, but mention it's Malaysia 17:30
-  const localizedTarget = target.toLocaleString(undefined, {
-    weekday: 'short',
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-  })
+  if (timeLeft.total <= 0) {
+    return (
+      <div className="countdown-container">
+        <div className="countdown-finished">🏁 RACE DAY IS HERE!</div>
+      </div>
+    )
+  }
 
   return (
-    <div className="countdown-root">
-      <h2 className="apology-title">⚠️ Important Notice</h2>
-      
-      <div className="apology-message">
-        <p className="apology-main">
-          We sincerely apologize to inform you that your claim will <strong>no longer be processed</strong>. 
-          After careful review and consideration, we regret that we are unable to proceed with your request.
-        </p>
-        
-        <p className="apology-secondary">
-          We understand this may be disappointing news, and we kindly ask that you do not hold any further expectations 
-          regarding this matter. The decision is final and cannot be reversed.
-        </p>
-        
-        <p className="thank-you">
-          Thank you for placing your trust in us and for following our updates. We appreciate your understanding 
-          and patience throughout this process.
-        </p>
+    <div className="countdown-container">
+      <div className="countdown-boxes">
+        <div className="countdown-box">
+          <span className="countdown-number">{String(timeLeft.days).padStart(3, '0')}</span>
+          <span className="countdown-label">Days</span>
+        </div>
+        <span className="countdown-separator">:</span>
+        <div className="countdown-box">
+          <span className="countdown-number">{String(timeLeft.hours).padStart(2, '0')}</span>
+          <span className="countdown-label">Hours</span>
+        </div>
+        <span className="countdown-separator">:</span>
+        <div className="countdown-box">
+          <span className="countdown-number">{String(timeLeft.minutes).padStart(2, '0')}</span>
+          <span className="countdown-label">Minutes</span>
+        </div>
+        <span className="countdown-separator">:</span>
+        <div className="countdown-box">
+          <span className="countdown-number">{String(timeLeft.seconds).padStart(2, '0')}</span>
+          <span className="countdown-label">Seconds</span>
+        </div>
       </div>
-
-      <div className="tagline">🎄 We Begin With Nature 🎄</div>
     </div>
   )
 }

@@ -1,0 +1,238 @@
+/* ============================================
+   RUNNER BIO CARDS — Hover Expand Effect
+   ============================================ */
+
+.runners-section {
+  text-align: center;
+}
+
+/* Container: 3 cards side by side */
+.runner-cards-container {
+  display: flex;
+  gap: 1rem;
+  min-height: 360px;
+}
+
+/* Each card */
+.runner-card {
+  flex: 1;
+  min-width: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  transition:
+    flex 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+/* HOVER: expand the hovered card, shrink siblings */
+.runner-cards-container:hover .runner-card {
+  flex: 0.8;
+}
+
+.runner-cards-container .runner-card:hover {
+  flex: 2.5;
+  transform: translateY(-6px);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+  border-color: var(--runner-color);
+}
+
+/* ---------- Card Header ---------- */
+.runner-header {
+  padding: 1.5rem 1.25rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.runner-emoji {
+  font-size: 2.5rem;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.runner-name {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.runner-nickname {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ---------- Card Body ---------- */
+.runner-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Quick stats — always visible */
+.runner-quick-stats {
+  display: flex;
+  justify-content: space-around;
+  gap: 0.5rem;
+}
+
+.quick-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.quick-stat-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--runner-color);
+  white-space: nowrap;
+}
+
+.quick-stat-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ---------- Details: hidden, revealed on hover ---------- */
+.runner-details {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.35s ease 0.15s;
+}
+
+.runner-card:hover .runner-details {
+  max-height: 600px;
+  opacity: 1;
+}
+
+/* Bio text */
+.runner-bio {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  text-align: left;
+  margin: 0;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Stats grid */
+.runner-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  padding: 0.75rem 0;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.detail-label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+.detail-value {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Fun fact */
+.runner-fun-fact {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  text-align: left;
+  margin: 0;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+}
+
+.fun-fact-icon {
+  font-style: normal;
+  flex-shrink: 0;
+}
+
+/* Edit button inside expanded card */
+.btn-edit-runner {
+  margin-top: 0.75rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+}
+
+.btn-edit-runner:hover {
+  background: var(--accent-orange);
+  color: #fff;
+  border-color: var(--accent-orange);
+  transform: translateY(-1px);
+}
+
+/* ============================================
+   RESPONSIVE — stack on mobile
+   ============================================ */
+@media (max-width: 768px) {
+  .runner-cards-container {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .runner-cards-container:hover .runner-card {
+    flex: 1;
+  }
+
+  .runner-card:hover {
+    flex: 1 !important;
+    transform: none;
+  }
+
+  /* On mobile, always show details */
+  .runner-details {
+    max-height: 600px;
+    opacity: 1;
+  }
+}

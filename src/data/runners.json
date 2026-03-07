@@ -1,0 +1,67 @@
+{
+  "runners": [
+    {
+      "id": 1,
+      "name": "Meyn",
+      "nickname": "The Speedster",
+      "emoji": "⚡",
+      "color": "#ff6b35",
+      "gradientFrom": "#ff6b35",
+      "gradientTo": "#f7931e",
+      "age": 25,
+      "runningSince": 2023,
+      "pb10k": "52:30",
+      "weeklyKm": 35,
+      "longestRun": "18 km",
+      "goalTime": "2:00:00",
+      "trainingRuns": 84,
+      "streak": "12 days",
+      "funFact": "Runs faster when his favorite playlist is on",
+      "bio": "The natural athlete of the group. Started running to destress and discovered a hidden talent for speed. Always the first to finish intervals."
+    },
+    {
+      "id": 2,
+      "name": "Harun",
+      "nickname": "The Engine",
+      "emoji": "🔥",
+      "color": "#00d4ff",
+      "gradientFrom": "#00d4ff",
+      "gradientTo": "#0099cc",
+      "age": 26,
+      "runningSince": 2022,
+      "pb10k": "55:15",
+      "weeklyKm": 40,
+      "longestRun": "20 km",
+      "goalTime": "2:10:00",
+      "trainingRuns": 102,
+      "streak": "21 days",
+      "funFact": "Has never skipped a single scheduled training run",
+      "bio": "The most consistent runner in the team. What he lacks in raw speed, he makes up with iron discipline and an unbreakable routine."
+    },
+    {
+      "id": 3,
+      "name": "Nazif",
+      "nickname": "The Wildcard",
+      "emoji": "🎯",
+      "color": "#a855f7",
+      "gradientFrom": "#a855f7",
+      "gradientTo": "#7c3aed",
+      "age": 24,
+      "runningSince": 2024,
+      "pb10k": "58:00",
+      "weeklyKm": 28,
+      "longestRun": "15 km",
+      "goalTime": "2:15:00",
+      "trainingRuns": 56,
+      "streak": "8 days",
+      "funFact": "Signed up for the half marathon on a dare — now fully committed",
+      "bio": "The newest runner of the trio. Improving at an insane rate and brings the most energy and heart to every session."
+    }
+  ],
+  "teamStats": {
+    "totalRuns": 242,
+    "totalKm": "1,847",
+    "weeklyAvgKm": 103,
+    "avgPace": "6:12"
+  }
+}
